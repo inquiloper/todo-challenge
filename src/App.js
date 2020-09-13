@@ -78,6 +78,7 @@ function App() {
     }
 
     return (
+        <>
         <Container>
             <Row className="justify-content-center">
                 <Col sm={12} style={styles.title}>
@@ -85,55 +86,61 @@ function App() {
                 </Col>
             </Row>
             <Row className="justify-content-center">
-            <Col sm={6}>
-            <Row>
+                <Col sm={6}>
+                    <Row>
+                        <Col sm={12}>
+                            <Tab.Container 
+                                id="custom-todo-tab-container" 
+                                defaultActiveKey={currentTab}
+                                onSelect={(key) => changeTab(key) }>
+                                <Row>
+                                    <Nav className="w-100" style={styles.nav}>
+                                        <Col>
+                                            <Nav.Item>
+                                                <Nav.Link eventKey="all">All</Nav.Link>
+                                            </Nav.Item>
+                                        </Col>
+                                        <Col>
+                                            <Nav.Item>
+                                                <Nav.Link eventKey="active">Active</Nav.Link>
+                                            </Nav.Item>
+                                        </Col>
+                                        <Col>
+                                            <Nav.Item>
+                                                <Nav.Link eventKey="completed">Completed</Nav.Link>
+                                            </Nav.Item>
+                                        </Col>
+                                    </Nav>
+                                </Row>
 
-                <Col sm={12}>
-                    <Tab.Container 
-                        id="custom-todo-tab-container" 
-                        defaultActiveKey={currentTab}
-                        onSelect={(key) => changeTab(key) }>
-                        <Row>
-                            <Nav className="w-100" style={styles.nav}>
-                                <Col>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="all">All</Nav.Link>
-                                    </Nav.Item>
-                                </Col>
-                                <Col>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="active">Active</Nav.Link>
-                                    </Nav.Item>
-                                </Col>
-                                <Col>
-                                    <Nav.Item>
-                                        <Nav.Link eventKey="completed">Completed</Nav.Link>
-                                    </Nav.Item>
-                                </Col>
-                            </Nav>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <Tab.Content>
-                                    <Tab.Pane eventKey="all">
-                                        <AllTodos tasks={currentTasks} addTask={addTask} toggleTask={toggleTask}/>
-                                    </Tab.Pane>
-                                    <Tab.Pane eventKey="active">
-                                        <ActiveTodos toggleTask={toggleTask} addTask={addTask} tasks={currentTasks}/>
-                                    </Tab.Pane>
-                                    <Tab.Pane eventKey="completed">
-                                        <CompletedTodos deleteAllCompletedTask={deleteAllCompletedTask} deleteTask={deleteTask} tasks={currentTasks}/>
-                                    </Tab.Pane>
-                                </Tab.Content>
-                            </Col>
-                        </Row>
-                    </Tab.Container>
+                                <Row>
+                                    <Col>
+                                        <Tab.Content>
+                                            <Tab.Pane eventKey="all">
+                                                <AllTodos tasks={currentTasks} addTask={addTask} toggleTask={toggleTask}/>
+                                            </Tab.Pane>
+                                            <Tab.Pane eventKey="active">
+                                                <ActiveTodos toggleTask={toggleTask} addTask={addTask} tasks={currentTasks}/>
+                                            </Tab.Pane>
+                                            <Tab.Pane eventKey="completed">
+                                                <CompletedTodos deleteAllCompletedTask={deleteAllCompletedTask} deleteTask={deleteTask} tasks={currentTasks}/>
+                                            </Tab.Pane>
+                                        </Tab.Content>
+                                    </Col>
+                                </Row>
+                            </Tab.Container>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
-            </Col>
-        </Row>
         </Container>
+
+        <footer class="footer">
+            <div class="container">
+                <span class="text-muted">Inquiloper @ devchallenges.io</span>
+            </div>
+        </footer>
+    </>
   );
 }
 
