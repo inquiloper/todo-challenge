@@ -11,10 +11,27 @@ function App() {
 
     const [currentTab, setCurrentTab] = useState("all");
     const [tasks, updateTasks] = useState([]);
-    const [currentTasks, setCurrentTasks] = useState(getCurrentTasks());
+    const [currentTasks, setCurrentTasks] = useState([]);
 
     useEffect(() => {
-        setCurrentTasks(getCurrentTasks());
+
+        let currentTasks = []
+        switch(currentTab) {
+            case "all": {
+                currentTasks = [...tasks];
+                break;
+            }
+            case "active": {
+                currentTasks = tasks.filter( el => !el.done)
+                break;
+            }
+            case "completed": {
+                currentTasks = tasks.filter (el => el.done)
+                break;
+            }
+        }
+        
+        setCurrentTasks(currentTasks);
     },[tasks, currentTab]);
 
     function changeTab(key) {
@@ -52,25 +69,6 @@ function App() {
     
     function deleteAllCompletedTask() {
         updateTasks([...(tasks.filter(task => task.done === false))])
-    }
-    
-    function getCurrentTasks() {
-        let currentTasks = []
-        switch(currentTab) {
-            case "all": {
-                currentTasks = [...tasks];
-                break;
-            }
-            case "active": {
-                currentTasks = tasks.filter( el => !el.done)
-                break;
-            }
-            case "completed": {
-                currentTasks = tasks.filter (el => el.done)
-                break;
-            }
-        }
-        return currentTasks;
     }
 
     function getRandomId() {
